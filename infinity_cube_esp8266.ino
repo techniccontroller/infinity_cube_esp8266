@@ -102,13 +102,14 @@ LEDStrip ledstrip = LEDStrip(&neopixel_leds, &logger);
 
 // colors
 uint32_t color = LEDStrip::Color24bit(200, 200, 0);
-float filterFactor = DEFAULT_SMOOTHING_FACTOR; // stores smoothing factor for led transition
-bool dynColorShiftActive = false;              // stores if dynamic color shift is active
-uint8_t dynColorShiftPhase = 0;                // stores the phase of the dynamic color shift
-int8_t dynColorShiftSpeed = 1;                 // stores the speed of the dynamic color shift, how many steps per update
-bool nightMode = false;                        // stores state of nightmode
-bool ledOff = false;                           // stores state of LED off
-uint8_t currentState = 0;                      // stores the current state of the cube
+float filterFactor = DEFAULT_SMOOTHING_FACTOR;      // stores smoothing factor for led transition
+bool dynColorShiftActive = false;                   // stores if dynamic color shift is active
+uint8_t dynColorShiftPhase = 0;                     // stores the phase of the dynamic color shift
+int8_t dynColorShiftSpeed = 1;                      // stores the speed of the dynamic color shift, how many steps per update
+uint16_t stripUpdatePeriod = PERIOD_STRIP_UPDATE;   // stores the period for updating the strip
+bool nightMode = false;                             // stores state of nightmode
+bool ledOff = false;                                // stores state of LED off
+uint8_t currentState = 0;                           // stores the current state of the cube
 
 // nightmode settings
 uint8_t nightModeStartHour = 22;
@@ -233,7 +234,7 @@ void loop()
         lastheartbeat = millis();
     }
 
-    if ((millis() - lastStep > PERIOD_STRIP_UPDATE) && !nightMode && !ledOff)
+    if ((millis() - lastStep > stripUpdatePeriod) && !nightMode && !ledOff)
     {
         updateStrip();
         lastStep = millis();
@@ -333,12 +334,15 @@ void updateStrip()
     if (dynColorShiftActive)
     {
         // dynamic color shift
-        dynColorShiftPhase = (dynColorShiftPhase + dynColorShiftSpeed) % 256;
+        dynColorShiftPhase = (dynColorShiftPhase + 1) % 256;
         ledstrip.setDynamicColorShiftPhase(dynColorShiftPhase);
+        if(dynColorShiftSpeed == 0) dynColorShiftSpeed = 1;
+        stripUpdatePeriod = PERIOD_STRIP_UPDATE / dynColorShiftSpeed;
     }
     else
     {
         ledstrip.setDynamicColorShiftPhase(-1);
+        stripUpdatePeriod = PERIOD_STRIP_UPDATE;
     }
 
     // Fill whole strip with color
@@ -592,8 +596,8 @@ void handleCommand()
         nightModeEndMin = split(timestr, '-', 3).toInt();
         uint8_t brightness = split(timestr, '-', 4).toInt();
         dynColorShiftSpeed = split(timestr, '-', 5).toInt();
-        if (dynColorShiftSpeed > 255)
-            dynColorShiftSpeed = 255;
+        if (dynColorShiftSpeed > 50)
+            dynColorShiftSpeed = 50;
         if (nightModeStartHour > 23)
             nightModeStartHour = 22; // set default
         if (nightModeStartMin > 59)
