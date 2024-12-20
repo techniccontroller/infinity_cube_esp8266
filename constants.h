@@ -1,8 +1,10 @@
 #define LED_COUNT 156
-#define LED_PIN 4
+#define LED_PIN 5
+#define BUTTONPIN 2        // pin to which the button is attached
+#define BUTTON_LED_PIN 4    
 #define CURRENT_LIMIT_LED 2000
 #define DEFAULT_SMOOTHING_FACTOR 0.2
-#define BUTTONPIN 14        // pin to which the button is attached
+
 #define SHORTPRESS 100
 #define LONGPRESS 2000
 
