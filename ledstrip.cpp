@@ -4,7 +4,7 @@ LEDStrip::LEDStrip(Adafruit_NeoPixel *neopixel_leds, UDPLogger *logger){
     this->neopixel_leds = neopixel_leds;
     this->logger = logger;
     currentLimit = DEFAULT_CURRENT_LIMIT;
-    brightness = 255;
+    stripBrightness = 255;
 }
 
 /**
@@ -70,7 +70,7 @@ uint32_t LEDStrip::interpolateColor24bit(uint32_t color1, uint32_t color2, float
 */
 void LEDStrip::initializeStrip(){
     neopixel_leds->begin();
-    neopixel_leds->setBrightness(brightness);
+    neopixel_leds->setBrightness(stripBrightness);
 }
 
 /**
@@ -79,7 +79,7 @@ void LEDStrip::initializeStrip(){
  * @param brightness brightness value (0-255)
  */
 void LEDStrip::setBrightness(uint8_t brightness){
-    brightness = brightness;
+    stripBrightness = brightness;
     neopixel_leds->setBrightness(brightness);
 }
 
@@ -98,7 +98,7 @@ void LEDStrip::setCurrentLimit(uint16_t currentLimit){
  * @return uint8_t brightness value (0-255)
  */
 uint8_t LEDStrip::getBrightness(){
-    return brightness;
+    return stripBrightness;
 }
 
 /**
@@ -201,17 +201,17 @@ void LEDStrip::drawOnLEDs(float factor){
         neopixel_leds->setPixelColor(i, newColor);
         current[i] = newColor;
 
-        totalCurrent += calcEstimatedLEDCurrent(newColor, brightness);
+        totalCurrent += calcEstimatedLEDCurrent(newColor, stripBrightness);
     }
 
     // Check if totalCurrent reaches CURRENTLIMIT -> if yes reduce brightness
     if(totalCurrent > currentLimit){
-        uint8_t newBrightness = brightness * float(currentLimit)/float(totalCurrent);
+        uint8_t newBrightness = stripBrightness * float(currentLimit)/float(totalCurrent);
         //logger->logString("CurrentLimit reached!!!: " + String(totalCurrent));
         neopixel_leds->setBrightness(newBrightness);
     }
     else {
-        neopixel_leds->setBrightness(brightness);
+        neopixel_leds->setBrightness(stripBrightness);
     }
 
     neopixel_leds->show();

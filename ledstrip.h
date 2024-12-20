@@ -37,7 +37,7 @@ class LEDStrip{
         UDPLogger *logger;
 
         uint16_t currentLimit;
-        uint8_t brightness;
+        uint8_t stripBrightness;
         int16_t dynamicColorShiftActivePhase = -1; // -1: not active, 0-255: active phase shift
 
         uint32_t target[LED_COUNT] = {0};
