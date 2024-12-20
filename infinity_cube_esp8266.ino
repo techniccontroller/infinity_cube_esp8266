@@ -403,19 +403,19 @@ void handleButton()
         // button press ended
         if ((millis() - buttonPressStart) > LONGPRESS)
         {
-            // longpress -> nightmode
+            // longpress -> ledoff
             logger.logString("Button press ended - longpress");
 
-            nightMode = true;
+            ledOff = true;
         }
         else if ((millis() - buttonPressStart) > SHORTPRESS)
         {
             // shortpress -> color change
             logger.logString("Button press ended - shortpress");
 
-            if (nightMode)
+            if (ledOff)
             {
-                nightMode = false;
+                ledOff = false;
             }
             else
             {
