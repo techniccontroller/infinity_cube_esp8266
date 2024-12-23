@@ -142,6 +142,9 @@ void setup()
 
     // configure button pin as input
     pinMode(BUTTONPIN, INPUT_PULLUP);
+    pinMode(BUTTON_LED_PIN, OUTPUT);
+
+    digitalWrite(BUTTON_LED_PIN, HIGH);
 
     ledstrip.initializeStrip();
     ledstrip.setCurrentLimit(CURRENT_LIMIT_LED);
@@ -170,6 +173,8 @@ void setup()
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
 
+    digitalWrite(BUTTON_LED_PIN, LOW);
+
     // init ESP8266 File manager (LittleFS)
     setupFS();
 
@@ -196,6 +201,41 @@ void setup()
     if (ESP.getResetReason().equals("Power On") || ESP.getResetReason().equals("External System"))
     {
         ledstrip.runLEDTest();
+
+        delay(1000);
+
+        // display IP
+        ledstrip.setBrightness(255);
+        uint8_t address = WiFi.localIP()[3];
+        uint8_t address_digit1 = address / 100;
+        uint8_t address_digit2 = (address % 100) / 10;
+        uint8_t address_digit3 = address % 10;
+        if (address_digit1 == 0) address_digit1 = 10;
+        if (address_digit2 == 0) address_digit2 = 10;
+        if (address_digit3 == 0) address_digit3 = 10;
+
+        for (int i = 0; i < address_digit1*3; i+=3)
+        {
+            ledstrip.setPixel(i, LEDStrip::Color24bit(0, 255, 0));
+        }
+        ledstrip.drawOnLEDsInstant();
+        delay(5000);
+        ledstrip.flush();
+
+        for (int i = 0; i < address_digit2*3; i+=3)
+        {
+            ledstrip.setPixel(i, LEDStrip::Color24bit(0, 255, 0));
+        }
+        ledstrip.drawOnLEDsInstant();
+        delay(5000);
+        ledstrip.flush();
+
+        for (int i = 0; i < address_digit3*3; i+=3)
+        {
+            ledstrip.setPixel(i, LEDStrip::Color24bit(0, 255, 0));
+        }
+        ledstrip.drawOnLEDsInstant();
+        delay(5000);
 
         // clear strip
         ledstrip.flush();
