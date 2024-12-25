@@ -58,7 +58,7 @@ IPAddress Subnetmask_AccessPoint(255, 255, 255, 0);
 const char *AP_SSID = "infinitycubeAP";
 
 // hostname
-const String hostname = "inifinitycube";
+const String hostname = "infinitycube";
 
 // ----------------------------------------------------------------------------------
 //                                        GLOBAL VARIABLES
@@ -103,7 +103,7 @@ LEDStrip ledstrip = LEDStrip(&neopixel_leds, &logger);
 // colors
 uint32_t color = LEDStrip::Color24bit(200, 200, 0);
 float filterFactor = DEFAULT_SMOOTHING_FACTOR;      // stores smoothing factor for led transition
-bool dynColorShiftActive = false;                   // stores if dynamic color shift is active
+bool dynColorShiftActive = true;                   // stores if dynamic color shift is active
 uint8_t dynColorShiftPhase = 0;                     // stores the phase of the dynamic color shift
 int8_t dynColorShiftSpeed = 1;                      // stores the speed of the dynamic color shift, how many steps per update
 uint16_t stripUpdatePeriod = PERIOD_STRIP_UPDATE;   // stores the period for updating the strip
