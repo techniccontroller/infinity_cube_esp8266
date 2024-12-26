@@ -169,6 +169,7 @@
 		float:left;
 		margin-right:15px;
 		vertical-align: middle;
+		margin-bottom: 5px;
 	}
 
 	.checkbox-container{
@@ -253,6 +254,22 @@
 		margin: 5px; 
 		background-color: rgba(147, 147, 158, 0.4);
 	}
+
+	.slider-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
+		margin: 20px;
+	}
+
+	.slider-group {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		width: 100%;
+		max-width: 300px;
+	}
   
 	</style>
 	<title>INFINITY CUBE</title>
@@ -322,31 +339,46 @@
 			</div>
 			<div class="control-container">
 				<div class="grid-container">
-					<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=128-0-0')" class="buttonClass dot" style="background:rgb(128,0,0);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=255-0-0')" class="buttonClass dot" style="background:rgb(255,0,0);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=0-0-128')" class="buttonClass dot" style="background:rgb(0,0,128);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=128-0-128')" class="buttonClass dot" style="background:rgb(128,0,128);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=255-0-128')" class="buttonClass dot" style="background:rgb(255,0,128);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=0-0-255')" class="buttonClass dot" style="background:rgb(0,0,255);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=128-0-255')" class="buttonClass dot" style="background:rgb(128,0,255);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=255-0-255')" class="buttonClass dot" style="background:rgb(255,0,255);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=0-128-0')" class="buttonClass dot" style="background:rgb(0,128,0);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=128-128-0')" class="buttonClass dot" style="background:rgb(128,128,0);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=255-128-0')" class="buttonClass dot" style="background:rgb(255,128,0);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=0-128-128')" class="buttonClass dot" style="background:rgb(0,128,128);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=128-128-128')" class="buttonClass dot" style="background:rgb(128,128,128);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=255-128-128')" class="buttonClass dot" style="background:rgb(255,128,128);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=0-128-255')" class="buttonClass dot" style="background:rgb(0,128,255);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=128-128-255')" class="buttonClass dot" style="background:rgb(128,128,255);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=255-128-255')" class="buttonClass dot" style="background:rgb(255,128,255);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=0-255-0')" class="buttonClass dot" style="background:rgb(0,255,0);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=128-255-0')" class="buttonClass dot" style="background:rgb(128,255,0);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=255-255-0')" class="buttonClass dot" style="background:rgb(255,255,0);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=0-255-128')" class="buttonClass dot" style="background:rgb(0,255,128);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=128-255-128')" class="buttonClass dot" style="background:rgb(128,255,128);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=255-255-128')" class="buttonClass dot" style="background:rgb(255,255,128);"></a></span></div>
-						<div class="grid-item"><span class="dot"><a onclick="sendCommand('./cmd?color=255-255-255')" class="buttonClass dot" style="background:rgb(255,255,255);"></a></span></div>
+					<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(128,0,0)" class="buttonClass dot" style="background:rgb(128,0,0);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(255,0,0)" class="buttonClass dot" style="background:rgb(255,0,0);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(0,0,128)" class="buttonClass dot" style="background:rgb(0,0,128);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(128,0,128)" class="buttonClass dot" style="background:rgb(128,0,128);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(255,0,128)" class="buttonClass dot" style="background:rgb(255,0,128);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(0,0,255)" class="buttonClass dot" style="background:rgb(0,0,255);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(128,0,255)" class="buttonClass dot" style="background:rgb(128,0,255);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(255,0,255)" class="buttonClass dot" style="background:rgb(255,0,255);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(0,128,0)" class="buttonClass dot" style="background:rgb(0,128,0);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(128,128,0)" class="buttonClass dot" style="background:rgb(128,128,0);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(255,128,0)" class="buttonClass dot" style="background:rgb(255,128,0);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(0,128,128)" class="buttonClass dot" style="background:rgb(0,128,128);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(128,128,128)" class="buttonClass dot" style="background:rgb(128,128,128);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(255,128,128)" class="buttonClass dot" style="background:rgb(255,128,128);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(0,128,255)" class="buttonClass dot" style="background:rgb(0,128,255);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(128,128,255)" class="buttonClass dot" style="background:rgb(128,128,255);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(255,128,255)" class="buttonClass dot" style="background:rgb(255,128,255);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(0,255,0)" class="buttonClass dot" style="background:rgb(0,255,0);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(128,255,0)" class="buttonClass dot" style="background:rgb(128,255,0);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(255,255,0)" class="buttonClass dot" style="background:rgb(255,255,0);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(0,255,128)" class="buttonClass dot" style="background:rgb(0,255,128);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(128,255,128)" class="buttonClass dot" style="background:rgb(128,255,128);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(255,255,128)" class="buttonClass dot" style="background:rgb(255,255,128);"></a></span></div>
+						<div class="grid-item"><span class="dot"><a onclick="sendColorCommand(255,255,255)" class="buttonClass dot" style="background:rgb(255,255,255);"></a></span></div>
 				</div>
+			</div>
+			<div class="slider-container">
+				<div class="slider-group">
+					<label for="red">R: <span id="redValue">128</span></label>
+					<input type="range" id="red" min="0" max="255" value="128" style="width: 100%" >
+				</div>
+				<div class="slider-group">
+					<label for="green">G: <span id="greenValue">0</span></label>
+					<input type="range" id="green" min="0" max="255" value="0" style="width: 100%">
+				</div>
+				<div class="slider-group">
+					<label for="blue">B: <span id="blueValue">128</span></label>
+					<input type="range" id="blue" min="0" max="255" value="128" style="width: 100%">
+				</div>
+				<div class="buttonClass save-button" onclick="updateColor()" style="width: 140px">SETZEN</div>
 			</div>
 		</div>
 
@@ -457,6 +489,30 @@
 				else {
 					container.classList.add("show");
 				}
+			}
+
+			function updateColor() {
+				const red = document.getElementById('red').value;
+				const green = document.getElementById('green').value;
+				const blue = document.getElementById('blue').value;
+
+				document.getElementById('redValue').textContent = red;
+				document.getElementById('greenValue').textContent = green;
+				document.getElementById('blueValue').textContent = blue;
+
+				const colorString = `${red}-${green}-${blue}`;
+				sendCommand(`./cmd?color=${colorString}`);
+			}
+
+			function sendColorCommand(r, g, b){
+				sendCommand(`./cmd?color=${r}-${g}-${b}`);
+				document.getElementById('red').value = r;
+				document.getElementById('green').value = g;
+				document.getElementById('blue').value = b;
+
+				document.getElementById('redValue').textContent = r;
+				document.getElementById('greenValue').textContent = g;
+				document.getElementById('blueValue').textContent = b;
 			}
 			
 		</script>
