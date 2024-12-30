@@ -52,7 +52,7 @@ https://github.com/user-attachments/assets/56aa27b0-6a68-4ba6-a1dc-3c27f7a5b737
 - micro-USB male connector
 - USB-Cable
 - USB power supply (5V/3A)
-- 3D printed parts (see [STL files](STL_files))
+- 3D printed parts (see [3d-printing-files](3d-printing-files))
 - Connecting wires and soldering tools
 
 ## Quickstart
