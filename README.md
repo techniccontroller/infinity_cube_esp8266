@@ -45,15 +45,17 @@ https://github.com/user-attachments/assets/56aa27b0-6a68-4ba6-a1dc-3c27f7a5b737
 
 ## Hardware Requirements
 
-- ESP8266 (Wemos D1 mini)
-- 156x NeoPixel WS2812B LED-strip 60/m
-- push button with LED (e.g. [Amazon](https://amzn.to/3BQIWIM))
-- USB-C female connector
-- micro-USB male connector
-- USB-Cable
-- USB power supply (5V/3A)
+- ESP8266 (Wemos D1 mini) ([Amazon*](https://amzn.to/4gA4mJn))
+- 156x NeoPixel WS2812B LED-strip 60/m ([Amazon*](https://amzn.to/4gz71TH))
+- push button with LED ([Amazon*](https://amzn.to/3BQIWIM))
+- USB-C female connector ([Amazon*](https://amzn.to/4fG015W))
+- micro-USB male connector ([Amazon*](https://amzn.to/4fITdVc))
+- USB-C cable ([Amazon*](https://amzn.to/3VUFK5x))
+- USB power supply (5V/3A) ([Amazon*](https://amzn.to/3VZ81Iv))
 - 3D printed parts (see [3d-printing-files](3d-printing-files))
 - Connecting wires and soldering tools
+
+<sub><sup>*The links are affiliate links. The offers do not come from me, however, I receive a commission through the reference, if then a purchase takes place, but without you incurring additional costs.</sup></sub>
 
 ## Quickstart
 
