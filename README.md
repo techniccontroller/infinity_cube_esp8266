@@ -21,7 +21,13 @@ This repository contains the code for an Infinity Cube based on the ESP8266 micr
 The Infinity Cube is a mesmerizing LED cube based on NeoPixel LEDs and 3D printered parts. The original design of the cube is create by [James](https://www.printables.com/model/41750-infinity-cube-light?lang=de). The stand is inspired by the design from [here](https://www.suchenfindengewinnen.de/halter-fuer-die-infinity-cube-light/) but adjusted to hold an button and reduced printing time.
 This repository completes completes the design with a software for ESP8266 to run and control the infinity cube. 
 
-<img src="images/infinity_cube_01.jpg" height="300px" /> <video src="https://techniccontroller.com/wp-content/uploads/infinity_cube_02.mp4" height="300px" controls />
+<img src="images/infinity_cube_01.jpg" height="300px" />
+
+
+
+https://github.com/user-attachments/assets/56aa27b0-6a68-4ba6-a1dc-3c27f7a5b737
+
+
 
 ## Features
 
