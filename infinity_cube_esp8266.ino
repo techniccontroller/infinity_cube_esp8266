@@ -16,7 +16,6 @@
  * - Flash Size: 4MB (FS:2MB OTA:~1019KB)
  * - Upload Speed: 115200
  *
- *
  * Libraries:
  * - Adafruit NeoPixel
  * - Adafruit GFX
