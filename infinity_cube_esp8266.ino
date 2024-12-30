@@ -102,14 +102,14 @@ LEDStrip ledstrip = LEDStrip(&neopixel_leds, &logger);
 
 // colors
 uint32_t color = LEDStrip::Color24bit(200, 200, 0);
-float filterFactor = DEFAULT_SMOOTHING_FACTOR;      // stores smoothing factor for led transition
-bool dynColorShiftActive = true;                   // stores if dynamic color shift is active
-uint8_t dynColorShiftPhase = 0;                     // stores the phase of the dynamic color shift
-int8_t dynColorShiftSpeed = 1;                      // stores the speed of the dynamic color shift, how many steps per update
-uint16_t stripUpdatePeriod = PERIOD_STRIP_UPDATE;   // stores the period for updating the strip
-bool nightMode = false;                             // stores state of nightmode
-bool ledOff = false;                                // stores state of LED off
-uint8_t currentState = 0;                           // stores the current state of the cube
+float filterFactor = DEFAULT_SMOOTHING_FACTOR;    // stores smoothing factor for led transition
+bool dynColorShiftActive = true;                  // stores if dynamic color shift is active
+uint8_t dynColorShiftPhase = 0;                   // stores the phase of the dynamic color shift
+int8_t dynColorShiftSpeed = 1;                    // stores the speed of the dynamic color shift, how many steps per update
+uint16_t stripUpdatePeriod = PERIOD_STRIP_UPDATE; // stores the period for updating the strip
+bool nightMode = false;                           // stores state of nightmode
+bool ledOff = false;                              // stores state of LED off
+uint8_t currentState = 0;                         // stores the current state of the cube
 
 // nightmode settings
 uint8_t nightModeStartHour = 22;
@@ -210,11 +210,14 @@ void setup()
         uint8_t address_digit1 = address / 100;
         uint8_t address_digit2 = (address % 100) / 10;
         uint8_t address_digit3 = address % 10;
-        if (address_digit1 == 0) address_digit1 = 10;
-        if (address_digit2 == 0) address_digit2 = 10;
-        if (address_digit3 == 0) address_digit3 = 10;
+        if (address_digit1 == 0)
+            address_digit1 = 10;
+        if (address_digit2 == 0)
+            address_digit2 = 10;
+        if (address_digit3 == 0)
+            address_digit3 = 10;
 
-        for (int i = 0; i < address_digit1*3; i+=3)
+        for (int i = 0; i < address_digit1 * 3; i += 3)
         {
             ledstrip.setPixel(i, LEDStrip::Color24bit(0, 255, 0));
         }
@@ -222,7 +225,7 @@ void setup()
         delay(5000);
         ledstrip.flush();
 
-        for (int i = 0; i < address_digit2*3; i+=3)
+        for (int i = 0; i < address_digit2 * 3; i += 3)
         {
             ledstrip.setPixel(i, LEDStrip::Color24bit(0, 255, 0));
         }
@@ -230,7 +233,7 @@ void setup()
         delay(5000);
         ledstrip.flush();
 
-        for (int i = 0; i < address_digit3*3; i+=3)
+        for (int i = 0; i < address_digit3 * 3; i += 3)
         {
             ledstrip.setPixel(i, LEDStrip::Color24bit(0, 255, 0));
         }
@@ -376,7 +379,8 @@ void updateStrip()
         // dynamic color shift
         dynColorShiftPhase = (dynColorShiftPhase + 1) % 256;
         ledstrip.setDynamicColorShiftPhase(dynColorShiftPhase);
-        if(dynColorShiftSpeed == 0) dynColorShiftSpeed = 1;
+        if (dynColorShiftSpeed == 0)
+            dynColorShiftSpeed = 1;
         stripUpdatePeriod = PERIOD_STRIP_UPDATE / dynColorShiftSpeed;
     }
     else

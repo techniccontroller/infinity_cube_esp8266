@@ -1,10 +1,11 @@
 #include "udplogger.h"
 
-UDPLogger::UDPLogger(){
-
+UDPLogger::UDPLogger()
+{
 }
 
-UDPLogger::UDPLogger(IPAddress interfaceAddr, IPAddress multicastAddr, int port){
+UDPLogger::UDPLogger(IPAddress interfaceAddr, IPAddress multicastAddr, int port)
+{
     _multicastAddr = multicastAddr;
     _port = port;
     _interfaceAddr = interfaceAddr;
@@ -12,13 +13,16 @@ UDPLogger::UDPLogger(IPAddress interfaceAddr, IPAddress multicastAddr, int port)
     _Udp.beginMulticast(_interfaceAddr, _multicastAddr, _port);
 }
 
-void UDPLogger::setName(String name){
+void UDPLogger::setName(String name)
+{
     _name = name;
 }
 
-void UDPLogger::logString(String logmessage){
-    // wait 5 milliseconds if last send was less than 5 milliseconds before 
-    if(millis() < (_lastSend + 5)){
+void UDPLogger::logString(String logmessage)
+{
+    // wait 5 milliseconds if last send was less than 5 milliseconds before
+    if (millis() < (_lastSend + 5))
+    {
         delay(5);
     }
     logmessage = _name + ": " + logmessage;
@@ -27,12 +31,13 @@ void UDPLogger::logString(String logmessage){
     logmessage.toCharArray(_packetBuffer, 100);
     _Udp.print(_packetBuffer);
     _Udp.endPacket();
-    _lastSend=millis();
+    _lastSend = millis();
 }
 
-void UDPLogger::logColor24bit(uint32_t color){
-  uint8_t resultRed = color >> 16 & 0xff;
-  uint8_t resultGreen = color >> 8 & 0xff;
-  uint8_t resultBlue = color & 0xff;
-  logString(String(resultRed) + ", " + String(resultGreen) + ", " + String(resultBlue));
+void UDPLogger::logColor24bit(uint32_t color)
+{
+    uint8_t resultRed = color >> 16 & 0xff;
+    uint8_t resultGreen = color >> 8 & 0xff;
+    uint8_t resultBlue = color & 0xff;
+    logString(String(resultRed) + ", " + String(resultGreen) + ", " + String(resultBlue));
 }

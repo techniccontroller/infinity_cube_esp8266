@@ -1,7 +1,7 @@
 #define LED_COUNT 156
 #define LED_PIN 5
-#define BUTTONPIN 2        // pin to which the button is attached
-#define BUTTON_LED_PIN 4    
+#define BUTTONPIN 2         // pin to which the button is attached
+#define BUTTON_LED_PIN 4    // pin to which the button LED is attached
 #define CURRENT_LIMIT_LED 2000
 #define DEFAULT_SMOOTHING_FACTOR 0.2
 
@@ -14,7 +14,7 @@
 #define PERIOD_DRAWING 10
 #define PERIOD_NIGHTMODE_CHECK 20000
 
-#define EEPROM_SIZE 30      // size of EEPROM to save persistent variables
+#define EEPROM_SIZE 30 // size of EEPROM to save persistent variables
 #define ADR_NM_START_H 0
 #define ADR_NM_END_H 4
 #define ADR_NM_START_M 8
@@ -24,4 +24,3 @@
 #define ADR_COL_RED 18
 #define ADR_COL_GREEN 19
 #define ADR_COL_BLUE 20
-

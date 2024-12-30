@@ -2,7 +2,7 @@
 
 /**
  * @brief Construct a new NTPClientPlus::NTPClientPlus object
- * 
+ *
  * @param udp   UDP client
  * @param poolServerName    time server name
  * @param utcx  UTC offset (in 1h)
@@ -19,7 +19,7 @@ NTPClientPlus::NTPClientPlus(UDP &udp, const char *poolServerName, int utcx, boo
 
 /**
  * @brief Starts the underlying UDP client, get first NTP timestamp and calc date
- * 
+ *
  */
 void NTPClientPlus::setupNTPClient()
 {
@@ -31,7 +31,7 @@ void NTPClientPlus::setupNTPClient()
 
 /**
  * @brief Get new update from NTP
- * 
+ *
  * @return 0     after successful update
  * @return -1    timeout after 1000 ms
  * @return 1     too much difference to previous received time (try again)
@@ -65,13 +65,15 @@ int NTPClientPlus::updateNTP()
     // this is NTP time (seconds since Jan 1 1900):
     unsigned long tempSecsSince1900 = highWord << 16 | lowWord;
 
-    if(tempSecsSince1900 < SEVENZYYEARS){
+    if (tempSecsSince1900 < SEVENZYYEARS)
+    {
         // NTP time is not valid
         return 2;
     }
 
     // check if time off last ntp update is roughly in the same range: 100sec apart (validation check)
-    if(this->_lastSecsSince1900 == 0 || tempSecsSince1900 - this->_lastSecsSince1900 < 100000){
+    if (this->_lastSecsSince1900 == 0 || tempSecsSince1900 - this->_lastSecsSince1900 < 100000)
+    {
         // Only update time then
         this->_lastUpdate = millis() - (10 * (timeout + 1)); // Account for delay in reading the time
 
@@ -84,17 +86,18 @@ int NTPClientPlus::updateNTP()
 
         return 0; // return 0 after successful update
     }
-    else{
+    else
+    {
         // Remember time of last update
         this->_lastSecsSince1900 = tempSecsSince1900;
-        
+
         return 1;
     }
 }
 
 /**
  * @brief Stops the underlying UDP client
- * 
+ *
  */
 void NTPClientPlus::end()
 {
@@ -105,7 +108,7 @@ void NTPClientPlus::end()
 
 /**
  * @brief Setter TimeOffset
- * 
+ *
  * @param timeOffset offset from UTC in seconds
  */
 void NTPClientPlus::setTimeOffset(int timeOffset)
@@ -120,8 +123,8 @@ long NTPClientPlus::getTimeOffset()
 
 /**
  * @brief Set time server name
- * 
- * @param poolServerName 
+ *
+ * @param poolServerName
  */
 void NTPClientPlus::setPoolServerName(const char *poolServerName)
 {
@@ -130,7 +133,7 @@ void NTPClientPlus::setPoolServerName(const char *poolServerName)
 
 /**
  * @brief Calc seconds since 1. Jan. 1900
- * 
+ *
  * @return unsigned long seconds since 1. Jan. 1900
  */
 unsigned long NTPClientPlus::getSecsSince1900() const
@@ -142,7 +145,7 @@ unsigned long NTPClientPlus::getSecsSince1900() const
 
 /**
  * @brief Get UNIX Epoch time since 1. Jan. 1970
- * 
+ *
  * @return unsigned long UNIX Epoch time since 1. Jan. 1970 in seconds
  */
 unsigned long NTPClientPlus::getEpochTime() const
@@ -152,8 +155,8 @@ unsigned long NTPClientPlus::getEpochTime() const
 
 /**
  * @brief Get current hours in 24h format
- * 
- * @return int 
+ *
+ * @return int
  */
 int NTPClientPlus::getHours24() const
 {
@@ -163,8 +166,8 @@ int NTPClientPlus::getHours24() const
 
 /**
  * @brief Get current hours in 12h format
- * 
- * @return int 
+ *
+ * @return int
  */
 int NTPClientPlus::getHours12() const
 {
@@ -178,8 +181,8 @@ int NTPClientPlus::getHours12() const
 
 /**
  * @brief Get current minutes
- * 
- * @return int 
+ *
+ * @return int
  */
 int NTPClientPlus::getMinutes() const
 {
@@ -188,8 +191,8 @@ int NTPClientPlus::getMinutes() const
 
 /**
  * @brief Get current seconds
- * 
- * @return int 
+ *
+ * @return int
  */
 int NTPClientPlus::getSeconds() const
 {
@@ -197,32 +200,34 @@ int NTPClientPlus::getSeconds() const
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  * @return String time formatted like `hh:mm:ss`
  */
-String NTPClientPlus::getFormattedTime() const {
-  unsigned long rawTime = this->getEpochTime();
-  unsigned long hours = (rawTime % 86400L) / 3600;
-  String hoursStr = hours < 10 ? "0" + String(hours) : String(hours);
+String NTPClientPlus::getFormattedTime() const
+{
+    unsigned long rawTime = this->getEpochTime();
+    unsigned long hours = (rawTime % 86400L) / 3600;
+    String hoursStr = hours < 10 ? "0" + String(hours) : String(hours);
 
-  unsigned long minutes = (rawTime % 3600) / 60;
-  String minuteStr = minutes < 10 ? "0" + String(minutes) : String(minutes);
+    unsigned long minutes = (rawTime % 3600) / 60;
+    String minuteStr = minutes < 10 ? "0" + String(minutes) : String(minutes);
 
-  unsigned long seconds = rawTime % 60;
-  String secondStr = seconds < 10 ? "0" + String(seconds) : String(seconds);
+    unsigned long seconds = rawTime % 60;
+    String secondStr = seconds < 10 ? "0" + String(seconds) : String(seconds);
 
-  return hoursStr + ":" + minuteStr + ":" + secondStr;
+    return hoursStr + ":" + minuteStr + ":" + secondStr;
 }
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  * @return String date formatted like `dd.mm.yyyy`
  */
-String NTPClientPlus::getFormattedDate() {
+String NTPClientPlus::getFormattedDate()
+{
     this->calcDate();
-    unsigned int dateDay = this->_dateDay; 
+    unsigned int dateDay = this->_dateDay;
     unsigned int dateMonth = this->_dateMonth;
     unsigned int dateYear = this->_dateYear;
 
@@ -233,10 +238,9 @@ String NTPClientPlus::getFormattedDate() {
     return dayStr + "." + monthStr + "." + yearStr;
 }
 
-
 /**
  * @brief Calc date from seconds since 1900
- * 
+ *
  */
 void NTPClientPlus::calcDate()
 {
@@ -311,8 +315,8 @@ void NTPClientPlus::calcDate()
 
 /**
  * @brief Getter for day of the week
- * 
- * @return unsigned int 
+ *
+ * @return unsigned int
  */
 unsigned int NTPClientPlus::getDayOfWeek()
 {
@@ -321,15 +325,15 @@ unsigned int NTPClientPlus::getDayOfWeek()
 
 /**
  * @brief Function to calc current year
- * 
- * @return unsigned int 
+ *
+ * @return unsigned int
  */
 unsigned int NTPClientPlus::getYear()
 {
 
     unsigned long sec1900 = this->getSecsSince1900();
 
-    //NTP starts at 1. Jan 1900
+    // NTP starts at 1. Jan 1900
     unsigned int result = 1900;
     unsigned int dayInYear = 0;
     unsigned int days = 0;
@@ -369,10 +373,10 @@ unsigned int NTPClientPlus::getYear()
 
 /**
  * @brief Function to check if given year is leap year
- * 
- * @param year 
- * @return true 
- * @return false 
+ *
+ * @param year
+ * @return true
+ * @return false
  */
 bool NTPClientPlus::isLeapYear(unsigned int year)
 {
@@ -408,9 +412,9 @@ bool NTPClientPlus::isLeapYear(unsigned int year)
 
 /**
  * @brief Get Month of given day of year
- * 
- * @param dayOfYear 
- * @return int 
+ *
+ * @param dayOfYear
+ * @return int
  */
 int NTPClientPlus::getMonth(int dayOfYear)
 {
@@ -518,7 +522,7 @@ int NTPClientPlus::getMonth(int dayOfYear)
 
 /**
  * @brief (private) Send NTP Packet to NTP server
- * 
+ *
  */
 void NTPClientPlus::sendNTPPacket()
 {
@@ -551,8 +555,8 @@ void NTPClientPlus::sendNTPPacket()
 
 /**
  * @brief (private) Set time offset accordance to summer time
- * 
- * @param summertime 
+ *
+ * @param summertime
  */
 void NTPClientPlus::setSummertime(bool summertime)
 {
@@ -568,20 +572,20 @@ void NTPClientPlus::setSummertime(bool summertime)
 
 /**
  * @brief (private) Update Summer/Winter time change
- * 
+ *
  * @returns bool summertime active
  */
 bool NTPClientPlus::updateSWChange()
 {
-    unsigned int dayOfWeek = this->_dayOfWeek; 
-    unsigned int dateDay = this->_dateDay; 
+    unsigned int dayOfWeek = this->_dayOfWeek;
+    unsigned int dateDay = this->_dateDay;
     unsigned int dateMonth = this->_dateMonth;
 
     bool summertimeActive = false;
-    
+
     if (this->_swChange)
     {
-        //Start: Set summer-/ winter time
+        // Start: Set summer-/ winter time
 
         // current month is march
         if (dateMonth == 3)
@@ -591,21 +595,22 @@ bool NTPClientPlus::updateSWChange()
             if ((this->daysInMonth[3] - dateDay) < 7)
             {
 
-                //Example year 2020: March 31 days; Check on March 26, 2020 (Thursday = weekday = 4); 5 days remaining; Last Sunday March 29, 2020
-                //Calculation: 31 - 26 = 5; 5 + 4 = 9;
-                //Result: Last day in March is a Tuesday. There follows another Sunday in October => set winter time
+                // Example year 2020: March 31 days; Check on March 26, 2020 (Thursday = weekday = 4); 5 days remaining; Last Sunday March 29, 2020
+                // Calculation: 31 - 26 = 5; 5 + 4 = 9;
+                // Result: Last day in March is a Tuesday. There follows another Sunday in October => set winter time
 
-                //Example year 2021: March 31 days; Check on March 30, 2021 (Tuesday = weekday = 2); 1 days remaining; Last Sunday March 28, 2021
-                //Calculation: 31 - 30 = 1; 1 + 2 = 3;
-                //Result: Last day in March is a Wednesday. Changeover to summer time already done => set summer time
+                // Example year 2021: March 31 days; Check on March 30, 2021 (Tuesday = weekday = 2); 1 days remaining; Last Sunday March 28, 2021
+                // Calculation: 31 - 30 = 1; 1 + 2 = 3;
+                // Result: Last day in March is a Wednesday. Changeover to summer time already done => set summer time
 
                 // If today is Sunday (dayOfWeek == 7) then this is already the last sunday in march -> set summer time
-                if(dayOfWeek == 7){
+                if (dayOfWeek == 7)
+                {
                     this->setSummertime(1);
                     summertimeActive = true;
                 }
 
-                //There follows within the last week in March one more Sunday => set winter time
+                // There follows within the last week in March one more Sunday => set winter time
                 else if (((this->daysInMonth[3] - dateDay) + dayOfWeek) >= 7)
                 {
                     this->setSummertime(0);
@@ -636,16 +641,17 @@ bool NTPClientPlus::updateSWChange()
             if ((this->daysInMonth[10] - dateDay) < 7)
             {
 
-                //Example year 2020: October 31 days; Check on October 26, 2020 (Monday = weekday = 1); 5 days remaining; last Sunday October 25, 2020
-                //Calculation: 31 - 26 = 5; 5 + 1 = 6;
-                //Result: Last day in October is a Saturday. Changeover to winter time already done => set winter time
+                // Example year 2020: October 31 days; Check on October 26, 2020 (Monday = weekday = 1); 5 days remaining; last Sunday October 25, 2020
+                // Calculation: 31 - 26 = 5; 5 + 1 = 6;
+                // Result: Last day in October is a Saturday. Changeover to winter time already done => set winter time
 
-                //Example year 2021: October 31 days; Check on 26. October 2021 (Tuesday = weekday = 2); 5 days remaining; Last Sunday 31. October 2021
-                //Calculation: 31 - 26 = 5; 5 + 2 = 7;
-                //Result: Last day in October is a Sunday. There follows another Sunday in October => set summer time
-                
+                // Example year 2021: October 31 days; Check on 26. October 2021 (Tuesday = weekday = 2); 5 days remaining; Last Sunday 31. October 2021
+                // Calculation: 31 - 26 = 5; 5 + 2 = 7;
+                // Result: Last day in October is a Sunday. There follows another Sunday in October => set summer time
+
                 // If today is Sunday (dayOfWeek == 7) then this is already the last sunday in october -> winter time
-                if(dayOfWeek == 7){
+                if (dayOfWeek == 7)
+                {
                     this->setSummertime(0);
                     summertimeActive = false;
                 }
