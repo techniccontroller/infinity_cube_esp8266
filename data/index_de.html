@@ -250,48 +250,48 @@
 		
 		<div id="settings-container" class="settings-container">
 			<div class="number-container">
-				<label for="brightness">Brightness:</label>
+				<label for="brightness">Helligkeit:</label>
 				<input type="range" id="brightness" name="volume" min="10" max="255">
 			</div>
 			<div class="number-container">
-				<label for="colorshiftspeed">Colorshift speed:</label>
+				<label for="colorshiftspeed">Farbwechsel Geschwindigkeit:</label>
 				<input type="range" id="colorshiftspeed" name="volume" min="0" max="50">
 			</div>
 			<div class="number-container">
-				<label for="nm_start" style="align-self: flex-start">Nightmode start time: </label> 
+				<label for="nm_start" style="align-self: flex-start">Nachtmodus Startzeit: </label> 
 				<input type="time" id="nm_start" name="nm_start" min="00:00" max="23:59">
 			</div>
 			<div class="number-container">
-				<label for="nm_end" style="align-self: flex-start">Nightmode end time: </label>
+				<label for="nm_end" style="align-self: flex-start">Nachtmodus Endzeit: </label>
 				<input type="time" id="nm_end" name="nm_end" min="00:00" max="23:59">
 			</div>
 			<div class="checkbox-container">
-				<label for="reset_wifi" style="align-self: flex-start">Reset WiFi settings</label> 
+				<label for="reset_wifi" style="align-self: flex-start">WiFi Einstellungen zurücksetzen</label> 
 				<div>
 					<input name= "reset_wifi" id="reset_wifi" type="checkbox" class="toggle">
 				</div>
 			</div>
-			<div class="buttonClass save-button" onclick="saveSettings()" style="width: 140px">SAVE</div>
+			<div class="buttonClass save-button" onclick="saveSettings()" style="width: 140px">SPEICHERN</div>
 		</div>
 
 		<div class="verticalline">			
 		</div>
 		<div class="checkbox-container">
-			<label for="NightMode" style="align-self: flex-start">Nightmode</label> 
+			<label for="NightMode" style="align-self: flex-start">Nachtmodus</label> 
 			<div>
-				<span style="font-weight: 800; color: green;" id="NightMode">Active</span>
+				<span style="font-weight: 800; color: green;" id="NightMode">Aktiv</span>
 			</div>
 		</div>
 
 		<div class="checkbox-container">
-			<label for="LED_Off" style="align-self: flex-start">Turn OFF LEDs</label> 
+			<label for="LED_Off" style="align-self: flex-start">LEDs AUSSCHALTEN</label> 
 			<div>
 				<input name= "LED_Off" id="LED_Off" type="checkbox" class="toggle">
 			</div>
 		</div>
 
 		<div class="checkbox-container" id = "colorshiftcontainer">
-			<label for="ColorShift" style="align-self: flex-start">Dyn. Colorshift</label>
+			<label for="ColorShift" style="align-self: flex-start">Dyn. Farbwechsel</label>
 			<div>
 				<input name= "ColorShift" id="ColorShift" type="checkbox" class="toggle">
 			</div>
@@ -345,7 +345,7 @@
 					<label for="blue">B: <span id="blueValue">128</span></label>
 					<input type="range" id="blue" min="0" max="255" value="128" style="width: 100%">
 				</div>
-				<div class="buttonClass save-button" onclick="updateColor()" style="width: 140px">SET</div>
+				<div class="buttonClass save-button" onclick="updateColor()" style="width: 140px">SETZEN</div>
 			</div>
 		</div>
 
@@ -365,12 +365,12 @@
 					var span_nightMode = document.querySelector('span[id="NightMode"]');
 					if(myVar.nightMode == "1") {
 						console.log("nightMode == 1");
-						span_nightMode.textContent = "Active";
+						span_nightMode.textContent = "Aktiv";
 						span_nightMode.style.color = "green";
 					}
 					else {
 						console.log("nightMode == 0");
-						span_nightMode.textContent = "Inactive";
+						span_nightMode.textContent = "Inaktiv";
 						span_nightMode.style.color = "red";
 					}
 
